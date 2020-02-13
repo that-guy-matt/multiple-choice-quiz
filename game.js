@@ -119,7 +119,7 @@ var currentScore = 0;
 //functions
 function initButtons() {
   //initialize button functionality
-  //RESTART.addEventListener("click", function() {location.startGame();});
+  //RESTART.addEventListener("click", function() {startGame();});
   RESTART.addEventListener("click", function() {
     location.reload();
   });
