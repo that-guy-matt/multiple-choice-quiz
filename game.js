@@ -1,13 +1,3 @@
-// constants
-//const QUESTION = document.getElementById("question");
-//const SCORE = document.getElementById("score");
-//const SCORECONT = document.getElementById("scoreContainer");
-//const RESTART = document.getElementById("restart");
-//const CHOICEA = document.getElementById("a");
-//const CHOICEB = document.getElementById("b");
-//const CHOICEC = document.getElementById("c");
-//const CHOICED = document.getElementById("d");
-
 const QUESTIONS = [
   {
     question: "Which is the smallest planet in our solar system?",
@@ -115,6 +105,7 @@ const QUESTIONS = [
 // variables
 var currentQuestion;
 var currentScore = 0;
+var giveScore;
 
 //functions
 function initButtons() {
@@ -159,6 +150,7 @@ function displayQuestion(q) {
 }
 
 function nextQuestion() {
+  giveScore = true;
   currentQuestion++;
   if (currentQuestion < QUESTIONS.length) {
     displayQuestion(QUESTIONS[currentQuestion]);
@@ -174,11 +166,14 @@ function checkAnswer(a) {
   //calls nextQuestion()
   if (a === QUESTIONS[currentQuestion].correct) {
     console.log("Correct!");
-    currentScore++;
+    if (giveScore) {
+      currentScore++;
+    }
+    nextQuestion();
   } else {
     console.log("WRONG");
+    giveScore = false;
   }
-  nextQuestion();
 }
 
 function endGame() {
