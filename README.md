@@ -10,13 +10,13 @@ The requirement for this homework assignment was to create a quiz application th
 
 - HTML
 - JavaScript
-- JQuery (upcoming)
+- JQuery
 
 ## Roadmap
 
 Currently the quiz is just functional. It goes through a set loop of 10 questions and keeps score of one point per question. There is no css styling at all at this point other than just to make a class to hide certain objects that will not be produced until the game end screen. The current plan is as follows:
 
-1. Recreate the game using JQuery (per homework assignment)
+1. ~~Recreate the game using JQuery (per homework assignment)~~ done
 2. Add some CSS styling because, let's be honest, it's kinda ugly
 3. (Optional) create a randomized array of the questions so they are not always in the same order
 

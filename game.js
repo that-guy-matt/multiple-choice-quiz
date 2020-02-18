@@ -1,12 +1,12 @@
 // constants
-const QUESTION = document.getElementById("question");
-const SCORE = document.getElementById("score");
-const SCORECONT = document.getElementById("scoreContainer");
-const RESTART = document.getElementById("restart");
-const CHOICEA = document.getElementById("a");
-const CHOICEB = document.getElementById("b");
-const CHOICEC = document.getElementById("c");
-const CHOICED = document.getElementById("d");
+//const QUESTION = document.getElementById("question");
+//const SCORE = document.getElementById("score");
+//const SCORECONT = document.getElementById("scoreContainer");
+//const RESTART = document.getElementById("restart");
+//const CHOICEA = document.getElementById("a");
+//const CHOICEB = document.getElementById("b");
+//const CHOICEC = document.getElementById("c");
+//const CHOICED = document.getElementById("d");
 
 const QUESTIONS = [
   {
@@ -120,7 +120,10 @@ var currentScore = 0;
 function initButtons() {
   //initialize button functionality
   //RESTART.addEventListener("click", function() {startGame();});
-  RESTART.addEventListener("click", function() {
+  // $("#restart").click(function() {
+  //   startGame();
+  // });
+  $("#restart").click(function() {
     location.reload();
   });
   // yes okay that last part to reload the page is a HOTFIX.
@@ -128,18 +131,18 @@ function initButtons() {
   // long story short, I couldn't fix it so I applied this as a hotfix.
   // it's not elegant, I am not proud of it, but it works.
   // simply starting the game and reinitializing the variables causes the game to crash on subsequent playthroughs...
-  RESTART.classList.add("hidden");
-  SCORECONT.classList.add("hidden");
-  CHOICEA.addEventListener("click", function() {
+  $("#restart").addClass("hidden");
+  $("#scoreContainer").addClass("hidden");
+  $("#a").click(function() {
     checkAnswer("a");
   });
-  CHOICEB.addEventListener("click", function() {
+  $("#b").click(function() {
     checkAnswer("b");
   });
-  CHOICEC.addEventListener("click", function() {
+  $("#c").click(function() {
     checkAnswer("c");
   });
-  CHOICED.addEventListener("click", function() {
+  $("#d").click(function() {
     checkAnswer("d");
   });
 }
@@ -147,11 +150,12 @@ function initButtons() {
 function displayQuestion(q) {
   //takes in the current question object
   //displays question and choices
-  QUESTION.innerHTML = q.question;
-  CHOICEA.innerHTML = q.answers.a;
-  CHOICEB.innerHTML = q.answers.b;
-  CHOICEC.innerHTML = q.answers.c;
-  CHOICED.innerHTML = q.answers.d;
+  $("#count").text(currentQuestion + 1);
+  $("#question").text(q.question);
+  $("#a").text(q.answers.a);
+  $("#b").text(q.answers.b);
+  $("#c").text(q.answers.c);
+  $("#d").text(q.answers.d);
 }
 
 function nextQuestion() {
@@ -178,9 +182,9 @@ function checkAnswer(a) {
 }
 
 function endGame() {
-  SCORE.innerHTML = currentScore;
-  RESTART.classList.remove("hidden");
-  SCORECONT.classList.remove("hidden");
+  $("#score").text(currentScore);
+  $("#restart").removeClass("hidden");
+  $("#scoreContainer").removeClass("hidden");
 }
 
 function startGame() {
