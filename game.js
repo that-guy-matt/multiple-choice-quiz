@@ -105,7 +105,7 @@ const QUESTIONS = [
 // variables
 var currentQuestion;
 var currentScore = 0;
-var giveScore;
+var giveScore = true;
 
 //functions
 
@@ -121,11 +121,17 @@ function displayQuestion(q) {
 }
 
 function nextQuestion() {
+  // resets give score flag
+  // resets messages
+  // increments current question and
+  // checks if it needs to continue
+  // or end the game
   giveScore = true;
   $("#message").removeClass();
   $("#message").addClass("hidden");
   $("#message").empty();
 
+  console.log("Current score: " + currentScore);
   console.log("Previous: " + currentQuestion);
   currentQuestion++;
   console.log("Next: " + currentQuestion);
@@ -150,10 +156,10 @@ function checkAnswer(a) {
     setTimeout(function() {
       if (giveScore) {
         currentScore++;
-        //console.log("Current score: " + currentScore);
+        console.log("Current score: " + currentScore);
       }
       nextQuestion();
-    }, 0);
+    }, 1200);
   } else {
     console.log("WRONG");
     $("#message").removeClass();
@@ -164,16 +170,20 @@ function checkAnswer(a) {
 }
 
 function endGame() {
+  // displays score and restart button
   $("#score").text(currentScore);
   $("#restart").removeClass("hidden");
   $("#scoreContainer").removeClass("hidden");
 
   $("#restart").click(function() {
-    restart();
+    startGame();
   });
 }
 
-function restart() {
+function startGame() {
+  // resets all variables,
+  // hides buttons,
+  // starts at first question
   $("#restart").addClass("hidden");
   $("#scoreContainer").addClass("hidden");
   currentQuestion = 0;
@@ -181,9 +191,9 @@ function restart() {
   displayQuestion(QUESTIONS[currentQuestion]);
 }
 
-function startGame() {
-  currentQuestion = 0;
-  currentScore = 0;
+function initGame() {
+  // initialize buttons
+  // starts the game
 
   $("#a").click(function() {
     checkAnswer("a");
@@ -198,8 +208,7 @@ function startGame() {
     checkAnswer("d");
   });
 
-  //initButtons();
-  displayQuestion(QUESTIONS[currentQuestion]);
+  startGame();
 }
 
-startGame();
+initGame();
