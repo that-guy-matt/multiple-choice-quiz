@@ -22,7 +22,7 @@ Currently the quiz is just functional. It goes through a set loop of 10 question
 
 ## Known issues
 
-1. Play again button functionality
+1. ~~Play again button functionality~~ FIXED
 
 - On subsequent playthroughs, the game would crash due to not getting the right question count increment. It jumps from 0 to the end after only a single question. I have no idea why it's doing that.
 - Currently this has been hotfixed by making the button do a page reload instead of resetting the game and variables.
