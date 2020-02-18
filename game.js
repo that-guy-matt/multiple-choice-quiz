@@ -108,35 +108,6 @@ var currentScore = 0;
 var giveScore;
 
 //functions
-function initButtons() {
-  //initialize button functionality
-  //RESTART.addEventListener("click", function() {startGame();});
-  // $("#restart").click(function() {
-  //   startGame();
-  // });
-  $("#restart").click(function() {
-    location.reload();
-  });
-  // yes okay that last part to reload the page is a HOTFIX.
-  // is that okay? I ran into a bug that I tore my hair out trying to fix
-  // long story short, I couldn't fix it so I applied this as a hotfix.
-  // it's not elegant, I am not proud of it, but it works.
-  // simply starting the game and reinitializing the variables causes the game to crash on subsequent playthroughs...
-  $("#restart").addClass("hidden");
-  $("#scoreContainer").addClass("hidden");
-  $("#a").click(function() {
-    checkAnswer("a");
-  });
-  $("#b").click(function() {
-    checkAnswer("b");
-  });
-  $("#c").click(function() {
-    checkAnswer("c");
-  });
-  $("#d").click(function() {
-    checkAnswer("d");
-  });
-}
 
 function displayQuestion(q) {
   //takes in the current question object
@@ -155,7 +126,9 @@ function nextQuestion() {
   $("#message").addClass("hidden");
   $("#message").empty();
 
+  console.log("Previous: " + currentQuestion);
   currentQuestion++;
+  console.log("Next: " + currentQuestion);
   if (currentQuestion < QUESTIONS.length) {
     displayQuestion(QUESTIONS[currentQuestion]);
   } else {
@@ -173,12 +146,14 @@ function checkAnswer(a) {
     $("#message").removeClass();
     $("#message").addClass("correct");
     $("#message").text("Correct!");
+    console.log("Current question: " + currentQuestion);
     setTimeout(function() {
       if (giveScore) {
         currentScore++;
+        //console.log("Current score: " + currentScore);
       }
       nextQuestion();
-    }, 1500);
+    }, 0);
   } else {
     console.log("WRONG");
     $("#message").removeClass();
@@ -192,12 +167,38 @@ function endGame() {
   $("#score").text(currentScore);
   $("#restart").removeClass("hidden");
   $("#scoreContainer").removeClass("hidden");
+
+  $("#restart").click(function() {
+    restart();
+  });
+}
+
+function restart() {
+  $("#restart").addClass("hidden");
+  $("#scoreContainer").addClass("hidden");
+  currentQuestion = 0;
+  currentScore = 0;
+  displayQuestion(QUESTIONS[currentQuestion]);
 }
 
 function startGame() {
   currentQuestion = 0;
   currentScore = 0;
-  initButtons();
+
+  $("#a").click(function() {
+    checkAnswer("a");
+  });
+  $("#b").click(function() {
+    checkAnswer("b");
+  });
+  $("#c").click(function() {
+    checkAnswer("c");
+  });
+  $("#d").click(function() {
+    checkAnswer("d");
+  });
+
+  //initButtons();
   displayQuestion(QUESTIONS[currentQuestion]);
 }
 
