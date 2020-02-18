@@ -151,6 +151,10 @@ function displayQuestion(q) {
 
 function nextQuestion() {
   giveScore = true;
+  $("#message").removeClass();
+  $("#message").addClass("hidden");
+  $("#message").empty();
+
   currentQuestion++;
   if (currentQuestion < QUESTIONS.length) {
     displayQuestion(QUESTIONS[currentQuestion]);
@@ -166,12 +170,20 @@ function checkAnswer(a) {
   //calls nextQuestion()
   if (a === QUESTIONS[currentQuestion].correct) {
     console.log("Correct!");
-    if (giveScore) {
-      currentScore++;
-    }
-    nextQuestion();
+    $("#message").removeClass();
+    $("#message").addClass("correct");
+    $("#message").text("Correct!");
+    setTimeout(function() {
+      if (giveScore) {
+        currentScore++;
+      }
+      nextQuestion();
+    }, 1500);
   } else {
     console.log("WRONG");
+    $("#message").removeClass();
+    $("#message").addClass("wrong");
+    $("#message").text("Wrong. (no points will be given for this question)");
     giveScore = false;
   }
 }
