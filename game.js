@@ -118,6 +118,13 @@ function displayQuestion(q) {
   $("#b").text(q.answers.b);
   $("#c").text(q.answers.c);
   $("#d").text(q.answers.d);
+
+  // TODO: this needs to be moved and updated before question is displayed
+  $(function() {
+    $("#progressbar").progressbar({
+      value: currentQuestion * QUESTIONS.length
+    });
+  });
 }
 
 function nextQuestion() {
