@@ -119,10 +119,10 @@ function displayQuestion(q) {
   $("#c").text(q.answers.c);
   $("#d").text(q.answers.d);
 
-  // TODO: this needs to be moved and updated before question is displayed
+  // function to handle progress bar
   $(function() {
     $("#progressbar").progressbar({
-      value: currentQuestion * QUESTIONS.length
+      value: (currentQuestion + 1) * QUESTIONS.length
     });
   });
 }
@@ -159,6 +159,7 @@ function checkAnswer(a) {
     $("#message").removeClass();
     $("#message").addClass("correct");
     $("#message").text("Correct!");
+
     console.log("Current question: " + currentQuestion);
     setTimeout(function() {
       if (giveScore) {
@@ -172,6 +173,7 @@ function checkAnswer(a) {
     $("#message").removeClass();
     $("#message").addClass("wrong");
     $("#message").text("Wrong. (no points will be given for this question)");
+
     giveScore = false;
   }
 }
@@ -179,8 +181,25 @@ function checkAnswer(a) {
 function endGame() {
   // displays score and restart button
   $("#score").text(currentScore);
-  $("#restart").removeClass("hidden");
+  // $("#restart").removeClass("hidden");
   $("#scoreContainer").removeClass("hidden");
+
+  $("#dialog").dialog({
+    buttons: [
+      {
+        text: "Play again?",
+        icon: "ui-icon-heart",
+        click: function() {
+          $("#dialog").dialog("close");
+          startGame();
+        },
+
+        // Uncommenting the following line would hide the text,
+        // resulting in the label being used as a tooltip
+        showText: false
+      }
+    ]
+  });
 
   $("#restart").click(function() {
     startGame();
